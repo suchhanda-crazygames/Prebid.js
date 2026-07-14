@@ -13,7 +13,6 @@ import { getRefererInfo } from '../src/refererDetection.js';
 import { targeting } from '../src/targeting.js';
 import {
   buildUrl,
-  formatQS,
   isEmpty,
   isNumber,
   logError,
@@ -21,7 +20,7 @@ import {
   parseSizesInput,
   parseUrl
 } from '../src/utils.js';
-import { DEFAULT_GAM_PARAMS, GAM_ENDPOINT, gdprParams } from '../libraries/gamUtils/gamUtils.js';
+import { DEFAULT_GAM_PARAMS, GAM_ENDPOINT, formatQS, gdprParams } from '../libraries/gamUtils/gamUtils.js';
 import { vastLocalCache } from '../src/videoCache.js';
 import { noCredsFetch as fetch } from '../src/ajax.js';
 import XMLUtil from '../libraries/xmlUtils/xmlUtils.js';

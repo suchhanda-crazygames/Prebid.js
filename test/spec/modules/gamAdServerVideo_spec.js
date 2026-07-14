@@ -568,6 +568,24 @@ describe('The DFP video support module', function () {
     expect(customParams).to.have.property('my_targeting', 'foo');
   });
 
+  it('should serialize array cust_params values as a comma-separated list, not PHP-style bracket keys', function () {
+    const url = parse(buildDfpVideoUrl({
+      adUnit: adUnit,
+      bid: utils.deepClone(bid),
+      params: {
+        'iu': 'my/adUnit',
+        cust_params: {
+          bidders_enabled: ['ix', 'rubicon'],
+        },
+      },
+    }));
+    const queryObject = utils.parseQS(url.query);
+    const custParamsString = decodeURIComponent(queryObject.cust_params);
+
+    expect(custParamsString).to.contain('bidders_enabled=ix,rubicon');
+    expect(custParamsString).to.not.contain('bidders_enabled[]');
+  });
+
   it('should merge the user-provided cust-params with the default ones when using url object', function () {
     const bidCopy = utils.deepClone(bid);
     bidCopy.adserverTargeting = Object.assign(bidCopy.adserverTargeting, {
